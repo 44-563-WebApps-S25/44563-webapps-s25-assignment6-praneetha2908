@@ -7,5 +7,33 @@
 </head>
 <body>
     <h1>City game by Praneetha Reddy Lakkam</h1>
+    <form>
+        <label for="secretCity">Where in the world:</label>
+        <input type="password" id="secretCity" value="San Diego"><br><br>
+   
+        <label for="cityGuess">Guess the city:</label>
+        <input type="text" id="cityGuess"><br><br>
+        <input type="button" value="Check the guess" onclick="checkCity()">
+    </form>
+    <p id="result"></p>
+    <script>
+        let oops = 0;
+        let found = 0;
+    function checkCity() {
+           const secretCity = document.getElementById('secretCity').value;
+           const cityGuess = document.getElementById('cityGuess').value;
+           if (cityGuess.toLowerCase() === secretCity.toLowerCase()) {
+          found++;
+          alert("GotCha");
+          } else {
+          oops++;
+          alert("Awe");
+          }
+         document.getElementById('result').innerHTML = `Oops: ${oops} | Found: ${found}`;
+        }
+ 
+    </script>
+</body>
+</html>
 </body>
 </html> 
