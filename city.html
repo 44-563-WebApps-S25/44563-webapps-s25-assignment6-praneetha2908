@@ -16,6 +16,11 @@
         <input type="button" value="Check the guess" onclick="checkCity()">
     </form>
     <p id="result"></p>
+    <div class="mt-4 text-center">
+        <img id="petImage" src="image1.jpg" alt="Pet Image" width="300" class="rounded shadow">
+        <br>
+        <button class="btn btn-success mt-2" onclick="updatePic()">Change Picture</button>
+    </div>
     <script>
         let oops = 0;
         let found = 0;
@@ -31,9 +36,27 @@
           }
          document.getElementById('result').innerHTML = `Oops: ${oops} | Found: ${found}`;
         }
- 
+        
+        let usePic = 1;
+
+        function updatePic() {
+            let imgElement = document.getElementById("petImage");
+
+            switch (usePic) {
+                case 1:
+                    imgElement.src = "image2.jpg";
+                    usePic = 2;
+                    break;
+                case 2:
+                    imgElement.src = "image3.jpg";
+                    usePic = 3;
+                    break;
+                case 3:
+                    imgElement.src = "image1.jpg"; // Wrap back to the first image
+                    usePic = 1;
+                    break;
+            }
+        }
     </script>
-</body>
-</html>
 </body>
 </html> 
