@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Dinner plan</title>
+   
+</head>
+<body>
+    <h1>Praneetha Reddy Lakkam Plans Dinner</h1>
+ 
+    <!-- Checkbox Form -->
+    <form>
+        <label>
+            <input type="checkbox" id="wine"> Serve wine
+        </label><br>
+       
+        <label>
+            <input type="checkbox" id="outside"> Eat outside
+        </label><br>
+       
+        <label>
+            <input type="checkbox" id="candles"> Light candles
+        </label><br><br>
+    </form>
+ 
+    <!-- Blue button with Bootstrap styling -->
+    <button class="btn btn-primary" onclick="choices()">Dinner Choices</button>
+ 
+    <p><strong>Dinner Choices:</strong></p>
+    <p id="choicesOutput"></p> <!-- Separate output for dinner choices -->
+ 
+    <!-- New Form for Main Dish and Dessert -->
+    <form>
+        <label for="mainDish">Enter main dish:</label>
+        <input type="text" id="mainDish" value="Butter Chicken"><br><br>
+ 
+        <label for="dessert">Enter dessert:</label>
+        <input type="text" id="dessert"><br><br>
+ 
+        <!-- Blue button with Bootstrap styling -->
+        <button type="button" class="btn btn-primary" onclick="updateDinner()">Update the Dinner</button>
+    </form>
+ 
+    <p><strong>Updated Dinner:</strong></p>
+    <p id="updatedOutput"></p> <!-- Separate output for updated dinner -->
+ 
+    <script>
+        let my_dinner = {};
+ 
+        function choices() {
+            my_dinner = {}; // Reset object
+ 
+            my_dinner.wine = document.getElementById("wine").checked;
+            my_dinner.outside = document.getElementById("outside").checked;
+            my_dinner.candles = document.getElementById("candles").checked;
+ 
+            document.getElementById("choicesOutput").innerHTML =
+                JSON.stringify(my_dinner, null, 2); // Separate output for dinner choices
+        }
+ 
+        function updateDinner() {
+            let mainDish = document.getElementById("mainDish").value;
+            let dessert = document.getElementById("dessert").value;
+ 
+            my_dinner.main = mainDish;
+            my_dinner.dessert = dessert;
+ 
+            document.getElementById("updatedOutput").innerHTML =
+                JSON.stringify(my_dinner, null, 2); // Separate output for updated dinner
+        }
+    </script>
+</body>
+</html>
