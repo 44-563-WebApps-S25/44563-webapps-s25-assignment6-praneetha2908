@@ -4,39 +4,61 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>City Challenge Game</title>
+    <!-- Pull in Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-    <h1>City game by Praneetha Reddy Lakkam</h1>
-    <form>
-        <label for="secretCity">Where in the world:</label>
-        <input type="password" id="secretCity" value="San Diego"><br><br>
-   
-        <label for="cityGuess">Guess the city:</label>
-        <input type="text" id="cityGuess"><br><br>
-        <input type="button" value="Check the guess" onclick="checkCity()">
+<body class="container mt-5 text-center">
+
+    <h1 class="mb-4 text-primary">City game by Praneetha Reddy Lakkam</h1>
+
+    <form class="mb-4">
+        <label for="secretCity" class="form-label">Where in the world:</label>
+        <input type="password" id="secretCity" value="San Diego" class="form-control w-50 mx-auto"><br>
+
+        <label for="cityGuess" class="form-label">Guess the city:</label>
+        <input type="text" id="cityGuess" class="form-control w-50 mx-auto"><br>
+
+        <!-- Added id="guessButton" for correct JavaScript reference -->
+        <input type="button" id="guessButton" class="btn btn-primary" value="Check the guess" onclick="checkCity()">
     </form>
-    <p id="result"></p>
+
+    <div id="result" class="fw-bold text-danger"></div>
+
     <div class="mt-4 text-center">
         <img id="petImage" src="image1.jpg" alt="Pet Image" width="300" class="rounded shadow">
         <br>
         <button class="btn btn-success mt-2" onclick="updatePic()">Change Picture</button>
     </div>
+
     <script>
         let oops = 0;
         let found = 0;
-    function checkCity() {
-           const secretCity = document.getElementById('secretCity').value;
-           const cityGuess = document.getElementById('cityGuess').value;
-           if (cityGuess.toLowerCase() === secretCity.toLowerCase()) {
-          found++;
-          alert("GotCha");
-          } else {
-          oops++;
-          alert("Awe");
-          }
-         document.getElementById('result').innerHTML = `Oops: ${oops} | Found: ${found}`;
+
+        function checkCity() {
+            const secretCity = document.getElementById('secretCity').value;
+            const cityGuess = document.getElementById('cityGuess').value;
+
+            if (cityGuess.toLowerCase() === secretCity.toLowerCase()) {
+                found++;
+                alert("GotCha");
+            } else {
+                oops++;
+                alert("Awe");
+            }
+
+            // Update the result display
+            document.getElementById('result').innerHTML = `Oops: ${oops} | Found: ${found}`;
+
+            // If wrong guesses exceed twice the correct guesses, disable guessing
+            if (oops > found * 2) {
+                document.getElementById('guessButton').setAttribute("onclick", "tooManyGuesses()");
+            }
         }
-        
+
+        function tooManyGuesses() {
+            alert("Sorry, too many wrong guesses.");
+        }
+
         let usePic = 1;
 
         function updatePic() {
@@ -58,5 +80,6 @@
             }
         }
     </script>
+
 </body>
-</html> 
+</html>
