@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Praneetha Reddy Lakkam Message Cost</h1>
+ 
+    <label for="basicprice">Enter cost per letter:</label>
+    <input type="number" id="basicprice" value="0.50"><br><br>
+ 
+    <label for="breakAt">Enter the length needed for the discount:</label>
+    <input type="number" id="breakAt" value="9"><br><br>
+ 
+    <label for="discount">Enter the discount percent:</label>
+    <input type="number" id="discount" value="10"><br><br>
+ 
+    <!-- Blue button using Bootstrap classes -->
+    <button class="btn btn-primary" onclick="amounts()">Show total</button>
+ 
+    <p id="result"></p>
+ 
+    <h2>Choose an Operation</h2>
+    <form>
+        <input type="radio" name="operation" value="times" onclick="chooseOp()"> Product<br>
+        <input type="radio" name="operation" value="add" onclick="chooseOp()"> Sum<br>
+        <input type="radio" name="operation" value="mod" onclick="chooseOp()"> Modulus<br>
+    </form>
+ 
+    <p id="calcResult"></p>
+   
+ 
+    <script>
+        function amounts() {
+            let price = parseFloat(document.getElementById("basicprice").value);
+            let breakAt = parseInt(document.getElementById("breakAt").value);
+            let discount = parseFloat(document.getElementById("discount").value) / 100;
+ 
+            let myResults = "";
+ 
+            for (let size = breakAt - 3; size <= breakAt + 3; size++) {
+                let totalCost = 0;
+ 
+                for (let i = 1; i <= size; i++) {
+                    if (i < breakAt) {
+                        totalCost += price;
+                    } else {
+                        totalCost += price * (1 - discount);
+                    }
+                }
+ 
+                myResults += `size ${size} is ${totalCost.toFixed(2)}; `;
+            }
+ 
+            document.getElementById("result").innerHTML = "Totals are: " + myResults;
+        }
+ 
+        function chooseOp() {
+            let price = parseFloat(document.getElementById("basicprice").value);
+            let breakAt = parseInt(document.getElementById("breakAt").value);
+            let resultText = "";
+ 
+            let radios = document.getElementsByName("operation");
+            let selectedOp = "";
+ 
+            for (let radio of radios) {
+                if (radio.checked) {
+                    selectedOp = radio.value;
+                    break;
+                }
+            }
+ 
+            if (selectedOp === "times") {
+                resultText = `${price} * ${breakAt} = ${price * breakAt}`;
+            } else if (selectedOp === "add") {
+                resultText = `${price} + ${breakAt} = ${price + breakAt}`;
+            } else if (selectedOp === "mod") {
+                resultText = `${breakAt} % ${price} = ${breakAt % price}`;
+            } else {
+                resultText = "Please select an operation.";
+            }
+ 
+            document.getElementById("calcResult").innerHTML = resultText;
+        }
+    </script>
+</body>
+</html>
